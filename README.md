@@ -116,9 +116,62 @@ Tools: Pandas, SQL views, Seaborn
 
 ## Next Phases (In Progress)
 
-- Done: Data Cleaning, KPI, XGBoost Modeling, SHAP, Power BI
-- Next: 
-- Phase 6: K-Means Segmentation
+## Phase 6: Clustering Model
+
+- **Algorithm**: KMeans (k=4, selected via silhouette analysis)
+- **Input Features**: `CLTV`, `Churn_Probability`, `ARPU`, `Risk_Score_Normalized`
+- **Output**: `Segment_Label` assigned to each customer
+
+---
+
+### Segment Naming
+- **Budget Loyalists**: High volume, low ARPU/CLTV, moderate churn
+- **High-Value Champions**: Low churn, high ARPU and CLTV
+- **At-Risk Value Drainers**: High churn, low value
+- **Long-term Sleepers**: Low activity, low value, moderate churn
+
+---
+
+### Segment KPI Analysis
+Visualizations created in **Power BI**:
+- Bar plots and donut charts for:
+  - Segment count distribution
+  - Average CLTV by segment
+  - Average ARPU by segment
+  - Average Churn Probability by segment
+  - Average Risk Score by segment
+- Interactive **segment slicer** added to filter all charts
+- Segment label integrated into core dataset
+
+---
+
+### Segment Strategy Matrix
+
+| Segment               | Volume       | CLTV       | Churn Risk | Strategic Action                              |
+|-----------------------|--------------|------------|------------|-----------------------------------------------|
+| **Budget Loyalists**  |  Very Hig   h|    Low     |   Medium   | Upsell with bundles; reduce acquisition cost  |
+| **High-Value Champions**  Medium     |  Very High |      Low   | Retain aggressively; offer loyalty programs   |
+| **At-Risk Drainers**  |   Moderate   |    Low     |   Very High| Targeted win-back or churn mitigation offers  |
+| **Long-term Sleepers**|    Low       |  Very Low  |    Medium  | Dormant — deprioritize or archive             |
+
+---
+
+### Deliverables
+- `Segment_Label` added to dataset (`loan_kpi_df`)
+- Power BI Dashboard with segment-level KPIs and filters
+- PNG visualizations saved under `/plots/segmentation`
+- Segment strategy table included in report and README
+- Enhanced usability with **segment-aware dashboards**
+
+---
+
+### Business Impact
+This segmentation allows the business to:
+- Prioritize retention for high-CLTV, low-churn customers
+- Implement targeted churn-prevention campaigns
+- Upsell or cross-sell to budget-loyal segments
+- Reduce resource spend on dormant customers
+"""
 - Phase 7: Time Series Forecasting (ARIMA/Prophet)
 - Phase 8: A/B Simulation
 - Phase 9: Streamlit Deployment (Optional)
@@ -137,7 +190,7 @@ Tools: Pandas, SQL views, Seaborn
 
 ### Star This Project
 
-If you found this project insightful or useful, please consider giving it a ⭐ on [GitHub](https://github.com/yourusername/FinSurf)! It helps others discover it and supports the creator.
+If you found this project insightful or useful, please consider giving it a ⭐ on GitHub! It helps others discover it and supports the creator.
 
 ---
 
