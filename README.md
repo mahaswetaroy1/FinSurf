@@ -29,8 +29,8 @@ FinSurf/
 │
 ├── data/
 │ └── raw/ # Original data
-| └── exports
-| └── processed
+| └── exports/
+| └── processed/
 │
 ├── notebooks/
 │ └── data_cleaning.ipynb # Cleaning + EDA
@@ -131,10 +131,9 @@ Tools: Pandas, SQL views, Seaborn
  ```bash
  git clone https://github.com/yourusername/FinSurf.git
  cd FinSurf
- 
+ ```
 ---
 
----
 
 ### Star This Project
 
@@ -164,16 +163,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 
-
-
 ---
 
-### 📬 Contact
+### Contact
+Created by Mahasweta Roy
 
-Created with ❤️ by **Mahasweta Roy**
+📧 Email Mahasweta
 
-- 📧 Email: [mahaswetaroy123@gmail.com](mailto:mahaswetaroy123@gmail.com)  
-- 🔗 LinkedIn: [https://www.linkedin.com/in/mahasweta-roy](https://www.linkedin.com/in/mahasweta-roy)
+🔗 Connect on LinkedIn
 
 ---
 
