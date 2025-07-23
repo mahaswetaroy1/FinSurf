@@ -222,12 +222,12 @@ streamlit run forecast_dashboard.py
 
 ### Segment Strategy Matrix
 
-| Segment               | Volume       | CLTV       | Churn Risk | Strategic Action                              |
-|-----------------------|--------------|------------|------------|-----------------------------------------------|
-| **Budget Loyalists**  |  Very Hig   h|    Low     |   Medium   | Upsell with bundles; reduce acquisition cost  |
-| **High-Value Champions**  Medium     |  Very High |      Low   | Retain aggressively; offer loyalty programs   |
-| **At-Risk Drainers**  |   Moderate   |    Low     |   Very High| Targeted win-back or churn mitigation offers  |
-| **Long-term Sleepers**|    Low       |  Very Low  |    Medium  | Dormant — deprioritize or archive             |
+| Segment                 | Volume       | CLTV       | Churn Risk | Strategic Action                              |
+|-----------------------  |--------------|------------|------------|-----------------------------------------------|
+| **Budget Loyalists**    |  Very High   |    Low     |   Medium   | Upsell with bundles; reduce acquisition cost  |
+| **High-Value Champions**|  Medium      |  Very High |     Low    | Retain aggressively; offer loyalty programs   |
+| **At-Risk Drainers**    |   Moderate   |    Low     |   Very High| Targeted win-back or churn mitigation offers  |
+| **Long-term Sleepers**  |    Low       |  Very Low  |    Medium  | Dormant — deprioritize or archive             |
 
 ## Strategic Recommendations (Module)
 - Spike in repayment post-2015 – analyze cohort behavior
