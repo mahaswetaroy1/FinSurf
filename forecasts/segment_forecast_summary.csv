@@ -1,5 +1,3 @@
-Segment,Model,Target Variable,MAE,RMSE
-Long-term Sleepers,Prophet,Loan_Volume,14185951.17,17061845.83
-At-Risk Value Drainers,Prophet,Loan_Volume,14185951.17,17061845.83
-High-Value Champions,Prophet,Loan_Volume,14185951.17,17061845.83
-Budget Loyalists,Prophet,Loan_Volume,14185951.17,17061845.83
+version https://git-lfs.github.com/spec/v1
+oid sha256:05d7ede7350647bccd618f7f2326109c2a02949cfe8bb686629741d4c86d3a91
+size 298
