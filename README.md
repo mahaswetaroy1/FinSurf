@@ -1,138 +1,165 @@
 # FinSurf: Credit Risk & Customer Retention Analytics Platform
 
-A robust end-to-end data analytics and machine learning project simulating real-world churn and credit risk modeling in the fintech domain.
+FinSurf is a full-stack credit risk and customer intelligence platform designed for financial institutions to monitor and predict repayment risk, churn behavior, and segment-level loan dynamics using real-time machine learning and time series forecasting.
+---
+
+## key Features
+
+- **Time-Series Forecasting** for:
+  - Loan repayment trends using Prophet & SARIMA
+  - Customer churn rate evolution
+  - Segment-level loan volume projections
+
+- **Segment-Wise Forecasting**:
+  - At-Risk Value Drainers
+  - Budget Loyalists
+  - High-Value Champions
+  - Long-Term Sleepers
+
+- **KPI Engineering**:
+  - Churn Rate, Repayment Rate
+  - CLTV, ARPU, LGD, PD, ECL
+
+- **Interactive BI Dashboard** via Streamlit:
+  - Forecast overlays (actual vs predicted)
+  - Dynamic segment-level exploration
+  - Future prediction breakdowns
 
 ---
 
-## Project Summary
 
-**Objective:**  
-Predict customer churn and credit risk, uncover revenue leakage, and build actionable dashboards using ML + BI.
+## Tech Stack
 
-**Stack:**  
-- Python (Pandas, Scikit-Learn, XGBoost, SHAP, Matplotlib)  
-- Power BI  
-- PostgreSQL (optional)  
-- Excel  
-
-**Project Goals:**
-- Clean and preprocess financial lending datasets
-- Engineer churn-relevant and credit-relevant KPIs
-- Build ML models to predict churn
-- Explain predictions using SHAP
-- Integrate predictions into Power BI dashboards
-
+- **Data Cleaning:**	pandas, numpy, seaborn
+- **Forecasting:**	fbprophet, SARIMA (statsmodels)
+- **ML Modeling:**	scikit-learn, SHAP
+- **Dashboarding:**	Streamlit, Power BI 
+- **Notebook Dev:**	Jupyter, VS Code
+- **Visualization:**	matplotlib, seaborn, plotly
+- **Forecast I/O Format:**	.csv with Month, Actual, Forecast, Lower, Upper columns
+- **Data:** LendingClub Loan Data
 ---
 
 ## Directory Structure
+
+```plaintext
 FinSurf/
+├── actuals/
+│ ├── actual_churn_rate.csv
+│ ├── actual_total_repayment.csv
+│ └── actual_segment_.csv (for each segment)
 │
-├── data/
-│ └── raw/ # Original data
-| └── exports/
-| └── processed/
+├── forecasts/
+│ ├── prophet_churn_forecast.csv
+│ ├── prophet_total_repayment.csv
+│ ├── forecast_segment_.csv (for each segment)
+│ ├── sarima_forecast_results.csv
+│ └── segment_forecast_summary.csv
+│
+├── streamlit_app/
+│ └── forecast_dashboard.py # Streamlit dashboard
 │
 ├── notebooks/
-│ └── data_cleaning.ipynb # Cleaning + EDA
-│ └── kpi_calculator.ipynb # KPI computation
-│ └── churn_model_xgboost.ipynb # ML modeling + SHAP
+│ ├── data_exploration.ipynb
+│ ├── kpi_calculator.ipynb
+│ ├── Modeling_Churn.ipynb
+│ ├── customer_segmentation.ipynb
+│ ├── forecast_revenue_sariam_prophet.ipynb
 │
-├── outputs/
-│ └── shap_summary_plot.png
-│ └── shap_bar_plot.png
-│ └── xgb_churn_predictions.csv
-│
+├── data/ # Shared data access directory
+  ├── exports
+│ ├── processed
+│ ├── raw
+├── outputs/ # Exported files/figures
+├── reports/ # Project deliverables / writeups
+├── scripts/ # Helper functions/scripts
+├── requirements.txt # Python dependencies
 ├── README.md
-└── requirements.txt
+└── LICENSE
 
-
+```
 ---
 
-## Phase 1: Data Cleaning & Feature Engineering
+## Quick Start
 
-- Loaded LendingClub-style dataset with churn flags
-- Dropped columns with >50% missing
-- Cleaned tenure, income, rate columns
-- Engineered:
-  - `customer_tenure` (months)
-  - `ARPU`, `CLTV`
-  - Income bins, product segments (planned)
+```bash
+git clone https://github.com/YOUR_USERNAME/FinSurf.git
+cd FinSurf
+pip install -r requirements.txt
+
+# Launch the Streamlit dashboard
+streamlit run streamlit_app/forecast_dashboard.py
+
+```
+---
+## Phase-by-Phase Execution Summary
+
+### Data Acquisition & Exploration
+- **Datasets Used:** [LendingClub Loan Data (Kaggle)](https://www.kaggle.com/datasets/wordsforthewise/lending-club)
+  - Segment-specific and aggregated CSVs from the FinSurf pipeline
+- **Tasks:**
+  - Loaded data using pandas
+  - Set display and column type configurations
+  - Counted numerical and categorical variables
+  - Created column metadata dictionary for profiling
+  - Dropped high-missing columns (>50%)
+  - Saved cleaned dataset
+
+### KPI Development
+**Objective**: Derive key financial metrics  by customer group and cohort.
+
+- **KPIs Computed:**
+  - **PD**: Probability of Default
+  - **LGD**: Loss Given Default
+  - **ECL**: Expected Credit Loss
+  - **ARPU**: Average Revenue Per User
+  - **CLTV**: Customer Lifetime Value
+
+**Tools & Methods**:
+- Pandas, NumPy,PostgreSQL (for queries), groupby/aggregation
+- Power BI & Seaborn for visualization
+- SQL Views (`vw_loan_kpi_metrics`) for pipeline-ready dashboards
+
+**Output**:
+- KPI Trends by cohort
+- Customer-level risk and value metrics
+
+## Churn Prediction Model
+**Objective**: Predict churn using behavioral and financial patterns.
+
+**Tools & Methods**:
+- XGBoost Classifier
+- Data Preprocessing, Label Encoding, SMOTE (if imbalance), train-test split
+- Evaluation: ROC, AUC, Precision, Recall, F1-score
+
+**Explainability**:
+- `shap.Explainer(xgb_clf)` on test data
+- Visuals:
+  - ![SHAP Beeswarm](outputs/shap_summary_plot.png)
+  - ![SHAP Bar](outputs/shap_bar_plot.png)
 
 ---
+## Customer Segmentation
+**Objective**: Segment customers for strategic targeting and retention analysis.
 
-## Phase 2: KPI Development
+**Tools & Methods**:
+- KMeans and DBSCAN clustering
+- Silhouette analysis
+- Segment overlays in Power BI
 
-Computed and validated:
+**Segments Identified**:
+- High-Value Champions
+- Budget Loyalists
+- At-Risk Value Drainers
+- Long-term Sleepers
 
-| KPI   | Description |
-|-------|-------------|
-| PD    | Probability of Default |
-| LGD   | Loss Given Default |
-| ECL   | Expected Credit Loss |
-| ARPU  | Avg. Revenue Per User |
-| CLTV  | Customer Lifetime Value |
-
-Tools: Pandas, SQL views, Seaborn
-
----
-
-## Phase 3: Churn Prediction Modeling
-
-- **Model Used:** XGBoost Classifier  
-- **Train/Test Split:** 80/20, stratified on churn_flag  
-- **Metrics:** Accuracy, Precision, Recall, ROC AUC  
-- **Probability Outputs:** Yes  
-- **Model Outputs Saved to CSV:** `xgb_churn_predictions.csv`
-
----
-
-## Phase 4: SHAP Explainability
-
-- Used `shap.TreeExplainer` to interpret model decisions
-- Plots saved:
-├── outputs/
-├── shap_summary_plot.png
-└── shap_bar_plot.png
-
-
-<img src="outputs/shap_bar_plot.png" width="400"/>
-
-- Key churn drivers: e.g., `tenure`, `CLTV`, `int_rate` (based on bar plot)
-
----
-
-## Phase 5: Power BI Integration
-
-- Predictions imported into Power BI  
-- Visualizations:
-- Churn Probability Distribution (Histogram)
-- Total Predicted Customers (Card)
-- Churned vs Retained Count (Bar)
-- KPI Cards: Avg ARPU, CLTV by Churn Status
-
-> Dataset used in Power BI: `outputs/xgb_churn_predictions.csv`
-
----
-
-## Next Phases (In Progress)
-
-## Phase 6: Clustering Model
+ ## Clustering Model
 
 - **Algorithm**: KMeans (k=4, selected via silhouette analysis)
 - **Input Features**: `CLTV`, `Churn_Probability`, `ARPU`, `Risk_Score_Normalized`
 - **Output**: `Segment_Label` assigned to each customer
 
----
-
-### Segment Naming
-- **Budget Loyalists**: High volume, low ARPU/CLTV, moderate churn
-- **High-Value Champions**: Low churn, high ARPU and CLTV
-- **At-Risk Value Drainers**: High churn, low value
-- **Long-term Sleepers**: Low activity, low value, moderate churn
-
----
-
-### Segment KPI Analysis
+## Segment KPI Analysis
 Visualizations created in **Power BI**:
 - Bar plots and donut charts for:
   - Segment count distribution
@@ -144,6 +171,54 @@ Visualizations created in **Power BI**:
 - Segment label integrated into core dataset
 
 ---
+## Forecasting Modules
+
+### 1. Total Repayment Forecast
+- `Prophet` on historical monthly repayment volumes
+- Outputs:
+  - Trend, weekly seasonality
+  - Confidence intervals
+  - `prophet_total_repayment.csv`
+
+### 2. Churn Risk Forecast
+- `Prophet` on monthly churn rate trend
+- Output CSV: `prophet_churn_forecast.csv`
+
+### 3. Segment-Level Loan Volume Forecasts
+- Prophet models for each customer segment
+- CSVs per segment under `forecasts/`
+
+---
+
+## Forecast Dashboard (Streamlit)
+FinSurf includes a visual dashboard that allows business users to explore actual vs forecasted KPIs across the board.
+
+- **Churn Risk Forecast:** Churn rate forecast vs actuals
+
+- **Total Repayment Forecast:** Loan repayment trend overlays
+
+- **Segment-Level Forecasts:** Forecasts for four customer segments
+
+- **Select your view:** Toggle through key performance variables
+
+**Launch Command**:
+```bash
+cd streamlit_app
+streamlit run forecast_dashboard.py
+```
+
+      Note: Some modules may fail if column naming conventions mismatch. Ensure your actuals and forecasts use the {metric}_{actual} and {metric}_{forecast} naming convention.
+
+## Power BI Integration
+
+- Predictions imported into Power BI  
+- Visualizations:
+- Churn Probability Distribution (Histogram)
+- Total Predicted Customers (Card)
+- Churned vs Retained Count (Bar)
+- KPI Cards: Avg ARPU, CLTV by Churn Status
+
+> Dataset used in Power BI: `outputs/xgb_churn_predictions.csv`
 
 ### Segment Strategy Matrix
 
@@ -154,7 +229,29 @@ Visualizations created in **Power BI**:
 | **At-Risk Drainers**  |   Moderate   |    Low     |   Very High| Targeted win-back or churn mitigation offers  |
 | **Long-term Sleepers**|    Low       |  Very Low  |    Medium  | Dormant — deprioritize or archive             |
 
----
+## Strategic Recommendations (Module)
+- Spike in repayment post-2015 – analyze cohort behavior
+- Long-term sleepers show volatility – monitor closer
+- Combine SARIMA + Prophet for improved hybrid models
+- Add unsupervised anomaly detection
+
+## Business Impact
+
+The FinSurf platform delivers actionable insights for customer retention and loan optimization:
+
+- Focuses retention efforts on high-CLTV, low-risk customers
+- Flags at-risk customers for early intervention
+- Identifies low-ROI segments (e.g., sleepers, drainers) to optimize marketing and support spend
+- Empowers financial analysts to forecast churn and repayments with confidence intervals
+- Integrates segment-aware dashboards in BI tools for executive decision-making
+
+
+## In Progress / Enhancements
+- Power BI dynamic dashboard using forecast outputs
+- SHAP force plots per customer ID
+- ARIMA/SARIMA hybridization for sensitive segments
+- Deployment to Hugging Face Spaces
+
 
 ### Deliverables
 - `Segment_Label` added to dataset (`loan_kpi_df`)
@@ -163,28 +260,6 @@ Visualizations created in **Power BI**:
 - Segment strategy table included in report and README
 - Enhanced usability with **segment-aware dashboards**
 
----
-
-### Business Impact
-This segmentation allows the business to:
-- Prioritize retention for high-CLTV, low-churn customers
-- Implement targeted churn-prevention campaigns
-- Upsell or cross-sell to budget-loyal segments
-- Reduce resource spend on dormant customers
-"""
-- Phase 7: Time Series Forecasting (ARIMA/Prophet)
-- Phase 8: A/B Simulation
-- Phase 9: Streamlit Deployment (Optional)
-
----
-
-## How to Run
-
-1. Clone the repo:
- ```bash
- git clone https://github.com/yourusername/FinSurf.git
- cd FinSurf
- ```
 ---
 
 
@@ -196,25 +271,7 @@ If you found this project insightful or useful, please consider giving it a ⭐ 
 
 ### License
 
-This project is licensed under the **MIT License**.
-MIT License
-
-Copyright (c) 2025 Mahasweta Roy
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-IN THE SOFTWARE.
+This project is under the MIT License. See `LICENSE` for full text.
 
 ---
 
