@@ -1,0 +1,5 @@
+Segment,Model,Target Variable,MAE,RMSE
+Long-term Sleepers,Prophet,Loan_Volume,14185951.17,17061845.83
+At-Risk Value Drainers,Prophet,Loan_Volume,14185951.17,17061845.83
+High-Value Champions,Prophet,Loan_Volume,14185951.17,17061845.83
+Budget Loyalists,Prophet,Loan_Volume,14185951.17,17061845.83
