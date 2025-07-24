@@ -11,9 +11,7 @@ venv/
 .ipynb_checkpoints/
 
 # Data and model files
-*.csv
 *.xlsx
-*.db
 *.pkl
 *.joblib
 
