@@ -211,11 +211,11 @@ streamlit run forecast_dashboard.py
 ### Sample Visuals
 
 ### Churn Intelligence Dashboard
-![Churn Dashboard](dashboards/churn_intelligence_dashboard.png)
+![Churn Dashboard](dashboards/screenshots/Churn_intelligence_dashboard.png)
 
 ### Credit Risk Forecasting
 
-![Customer Segment Dashboard](assets/images/customer_segment_dashboard.png)
+![Customer Segment Dashboard](dashboards/screenshots/Customer_Segments_Dashboard.png)
 
 ### Segment Strategy Matrix
 
