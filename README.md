@@ -1,36 +1,23 @@
-# FinSurf: Credit Risk & Customer Retention Analytics Platform
+# FinSurf: Credit Risk, Churn Intelligence & Customer Retention Analytics Platform
 
 FinSurf is a full-stack credit risk and customer intelligence platform designed for financial institutions to monitor and predict repayment risk, churn behavior, and segment-level loan dynamics using real-time machine learning and time series forecasting.
 ---
 
 ## key Features
 
-- **Time-Series Forecasting** for:
-  - Loan repayment trends using Prophet & SARIMA
-  - Customer churn rate evolution
-  - Segment-level loan volume projections
-
-- **Segment-Wise Forecasting**:
-  - At-Risk Value Drainers
-  - Budget Loyalists
-  - High-Value Champions
-  - Long-Term Sleepers
-
-- **KPI Engineering**:
-  - Churn Rate, Repayment Rate
-  - CLTV, ARPU, LGD, PD, ECL
-
-- **Interactive BI Dashboard** via Streamlit:
-  - Forecast overlays (actual vs predicted)
-  - Dynamic segment-level exploration
-  - Future prediction breakdowns
+- **Churn Analytics**: Forecasts churn rate using ARIMA, Prophet & SARIMA; integrated with Power BI for real-time trends
+- **Customer Segmentation**: KMeans + DBSCAN clustering on behavioral, transactional & risk metrics
+- **Credit Risk KPIs**: PD, LGD, ECL, ARPU, CLTV, segment-wise profitability
+- **Interactive Power BI & Streamlit Dashboards**: Executive-ready views for strategic decisions, Forecast overlays (actual vs predicted), Dynamic segment-level exploration, Future prediction breakdowns
+- **Explainable AI**: SHAP-based feature interpretation for churn drivers
+- **SQL Pipelines**: PostgreSQL-based cohort analysis, rolling KPIs, segmentation views
 
 ---
 
 
 ## Tech Stack
 
-- **Data Cleaning:**	pandas, numpy, seaborn
+- **Data Cleaning:**	pandas, numpy
 - **Forecasting:**	fbprophet, SARIMA (statsmodels)
 - **ML Modeling:**	scikit-learn, SHAP
 - **Dashboarding:**	Streamlit, Power BI 
@@ -71,7 +58,8 @@ FinSurf/
 │ ├── processed
 │ ├── raw
 ├── outputs/ # Exported files/figures
-├── reports/ # Project deliverables / writeups
+├── dashboards/ # Power BI files 
+├── reports/ 
 ├── scripts/ # Helper functions/scripts
 ├── requirements.txt # Python dependencies
 ├── README.md
@@ -219,6 +207,15 @@ streamlit run forecast_dashboard.py
 - KPI Cards: Avg ARPU, CLTV by Churn Status
 
 > Dataset used in Power BI: `outputs/xgb_churn_predictions.csv`
+
+### Sample Visuals
+
+### Churn Intelligence Dashboard
+![Churn Dashboard](dashboards/churn_intelligence_dashboard.png)
+
+### Credit Risk Forecasting
+
+![Customer Segment Dashboard](assets/images/customer_segment_dashboard.png)
 
 ### Segment Strategy Matrix
 
