@@ -16,7 +16,6 @@ venv/
 *.joblib
 
 # Reports and output
-*.pdf
 *.html
 
 # OS and editor stuff
